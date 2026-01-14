@@ -62,3 +62,12 @@ uv add numpy
 
 - Each time you add a new dependency you need to reload the devShell. I have a
   shell alias, `alias rr="direnv reload"` for this purpose.
+
+## How to use/extend this
+
+For the most part, if you simply make changes with `uv` this should "Just
+Work". There will be some busywork if some of the Python dependencies aren't
+perfectly configured; but all of that can be addressed.
+
+To add a new package, just add it next to `pkgs.uv` in
+[nix/outputs.nix](./nix/outputs.nix) in the `devShells` `package` statement.
