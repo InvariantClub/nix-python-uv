@@ -1,0 +1,46 @@
+[project]
+name = "nix-python-uv"
+version = "0.1.0"
+description = "An example of a Python project managed under `uv`."
+readme = "README.md"
+requires-python = ">=3.13"
+source = { editable = "." }
+# Note: If you're _only_ developing this project using Nix, it's better to not
+# specify version bounds here; as they aren't respected by the Nix setup.
+dependencies = [
+  "jupyter",
+  "pandas",
+  "pytest",
+]
+
+
+[project.scripts]
+hello = "scripts.hello:hello"
+other = "scripts.other:other"
+
+
+[tool.hatch.build.targets.wheel]
+include = ["src/"]
+
+
+[build-system]
+requires = ["hatchling", "editables"]
+build-backend = "hatchling.build"
+
+
+[tool.ruff]
+indent-width = 2
+line-length = 100
+
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+
+[tool.pytest]
+markers = [
+  "pure: marks tests as pure; (deselect with '-m \"not pure\"')",
+]
