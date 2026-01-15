@@ -56,14 +56,18 @@ nix flake check
 > i.e. "pure"; that is, they don't require external dependencies, then they
 > will work.
 
+
 #### Code formatting
 
 ``` sh
 nix fmt
 ```
 
-> [!Note] `nix fmt` only formats files that are changed; not all files in the
+> [!Note]
+>
+> `nix fmt` only formats files that are changed; not all files in the
 > repo. For that, run `ruff format` directly.
+
 
 #### Add a new dependency
 
@@ -71,10 +75,12 @@ nix fmt
 uv add numpy
 ```
 
+
 ## Tips and trivia
 
 - Each time you add a new dependency you need to reload the devShell. I have a
   shell alias, `alias rr="direnv reload"` for this purpose.
+
 
 ## How to use/extend this
 
