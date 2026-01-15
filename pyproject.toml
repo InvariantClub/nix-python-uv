@@ -15,12 +15,12 @@ dependencies = [
 
 
 [project.scripts]
-hello = "scripts.hello:hello"
-other = "scripts.other:other"
+hello = "nix_python_uv.hello:hello"
+some_script = "scripts.other:other"
 
 
 [tool.hatch.build.targets.wheel]
-include = ["src/"]
+include = ["nix_python_uv/"]
 
 
 [build-system]

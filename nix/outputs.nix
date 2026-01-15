@@ -60,6 +60,10 @@ with inputs; {
       pythonSet = pythonSets.overrideScope editableOverlay;
       virtualenv = pythonSet.mkVirtualEnv "dev-venv" workspace.deps.all;
 
+      pythonDistSet = pythonSets.overrideScope overlay;
+
+      inherit (pkgs.callPackages pyproject-nix.build.util { }) mkApplication;
+
       addMeta = p: drv:
         drv.overrideAttrs (old: {
           passthru = lib.recursiveUpdate (old.passthru or { }) {
@@ -76,9 +80,24 @@ with inputs; {
     in
     {
       packages = rec {
-        hello = addMeta "hello" (pythonSet.mkVirtualEnv "hello-venv" workspace.deps.default);
-        other = addMeta "other" (pythonSet.mkVirtualEnv "other-venv" workspace.deps.default);
+        hello = addMeta "hello" (mkApplication {
+          venv = pythonDistSet.mkVirtualEnv "application-env" workspace.deps.all;
+          package = pythonDistSet.nix-python-uv;
+        });
+
         default = hello;
+
+        docker-image = pkgs.dockerTools.streamLayeredImage {
+          name = "nix-python-uv-hello";
+          tag = "latest";
+          created = "now";
+          contents = [
+            hello
+          ];
+          config = {
+            Entrypoint = [ "${lib.getExe hello}" ];
+          };
+        };
       };
 
 

@@ -13,7 +13,7 @@ python
 #### Running an entrypoint with `nix run ...`
 
 ``` sh
-nix run .#
+nix run .
 ```
 
 #### Running a `[script]` entrypoint directly
@@ -21,6 +21,19 @@ nix run .#
 ``` sh
 > hello
 Hello, world!
+
+> some_script
+Hello, world!
+Hello, other world!
+```
+
+
+### Building a Docker image
+
+``` sh
+nix build .#docker-image
+./result < docker load
+docker run nix-python-uv-hello
 ```
 
 #### Testing
