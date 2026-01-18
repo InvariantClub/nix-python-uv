@@ -1,5 +1,16 @@
 # nix-python-uv
 
+## What's here
+
+This is a fully-fledged python project controlled by the `uv` package manager.
+Firstly there's the main library defined in the `pyproject.yaml` and in the
+`nix_python_uv` folder. There's some scripts, tests, and a few examples of
+dependencies.
+
+In the Nix setup we define some the build environment, tests, code formatters,
+and a docker image with the entrypoint ready to run.
+
+
 ## What's possible
 
 #### Regular Python development
