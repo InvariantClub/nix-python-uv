@@ -42,8 +42,7 @@ Hello, other world!
 #### Building a Docker image
 
 ``` sh
-nix build .#docker-image
-./result < docker load
+nix build .#docker-image && ./result | docker load
 docker run nix-python-uv-hello
 ```
 
